@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import profileIcon from "../assets/img/profileIcon.png";
 import logoText from "../assets/img/LogoTxt.png";
 import { SearchBar } from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 import useAuthApi from "../api/auth";
 import MainConfirmDialog from "./MainConfirmDialog";
+import profileIconWhite from "../assets/img/profileIconWhite.png";
+import logoutIcon from "../assets/img/LogoutIcon.png";
 
 interface styleType {
   $ismobile: boolean;
@@ -166,6 +167,11 @@ const PopupBtn = styled.button<styleType>`
   transition: transform 0.2s ease-in-out;
 `;
 
+const PopupImg = styled.img<{ $width: string; $mr: string }>`
+  width: ${(props) => props.$width};
+  margin-right: ${(props) => props.$mr};
+`;
+
 const MenuPopup = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -218,7 +224,7 @@ const MainHeader = ({ keyword, setKeyword, setIsNewUser }: HeaderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const menuItems = [
     { label: "홈", path: "/" },
-    { label: "커뮤니티", path: "/comnmuniy" },
+    { label: "커뮤니티", path: "/community" },
     { label: "영화", path: "/movie" },
     { label: "내가 찜한 리스트", path: "/wish" },
   ];
@@ -356,7 +362,7 @@ const MainHeader = ({ keyword, setKeyword, setIsNewUser }: HeaderProps) => {
               <UserImageContainer
                 ref={imageRef}
                 $ismobile={isMobile}
-                $image={user.image ? user.image : profileIcon}
+                $image={user.image ? user.image : profileIconWhite}
                 onClick={handlePopup}
               />
             </>
@@ -373,9 +379,11 @@ const MainHeader = ({ keyword, setKeyword, setIsNewUser }: HeaderProps) => {
           transition={{ duration: 0.3 }}
         >
           <PopupBtn onClick={onClickMypage} $ismobile={isMobile}>
+            <PopupImg src={profileIconWhite} $width="20px" $mr="5px" />
             마이페이지
           </PopupBtn>
           <PopupBtn onClick={onClickLogout} $ismobile={isMobile}>
+            <PopupImg src={logoutIcon} $width="15px" $mr="10px" />
             로그아웃
           </PopupBtn>
         </Popup>

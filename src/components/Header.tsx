@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import profileIcon from "../assets/img/profileIcon.png";
 import logoText from "../assets/img/LogoTxt.png";
 import { useNavigate } from "react-router-dom";
 import useAuthApi from "../api/auth";
-
+import profileIcon from "../assets/img/profileIcon.png";
+import profileIconBlack from "../assets/img/profileIconBlack.png";
+import logoutIcon from "../assets/img/LogoutIcon.png";
 interface styleType {
   $ismobile: boolean;
 }
@@ -134,7 +135,10 @@ const PopupBtn = styled.button`
   }
   transition: transform 0.2s ease-in-out;
 `;
-
+const PopupImg = styled.img<{ $width: string; $mr: string }>`
+  width: ${(props) => props.$width};
+  margin-right: ${(props) => props.$mr};
+`;
 const MenuPopup = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -183,7 +187,7 @@ const Header = () => {
   const { userInfoGet, logout } = useAuthApi();
   const menuItems = [
     { label: "홈", path: "/" },
-    { label: "커뮤니티", path: "/comnmuniy" },
+    { label: "커뮤니티", path: "/community" },
     { label: "영화", path: "/movie" },
     { label: "내가 찜한 리스트", path: "/wish" },
   ];
@@ -245,6 +249,8 @@ const Header = () => {
     };
     userDataGet();
   }, []);
+
+  const theme = useTheme();
 
   if (!mounted) return null;
 
@@ -335,8 +341,14 @@ const Header = () => {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <PopupBtn onClick={onClickMypage}>마이페이지</PopupBtn>
-          <PopupBtn onClick={onClickLogout}>로그아웃</PopupBtn>
+          <PopupBtn onClick={onClickMypage}>
+            <PopupImg src={theme.profileImg} $width="20px" $mr="5px" />
+            마이페이지
+          </PopupBtn>
+          <PopupBtn onClick={onClickLogout}>
+            <PopupImg src={logoutIcon} $width="15px" $mr="10px" />
+            로그아웃
+          </PopupBtn>
         </Popup>
       )}
     </>

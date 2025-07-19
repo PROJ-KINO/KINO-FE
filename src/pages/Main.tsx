@@ -19,9 +19,9 @@ const MainContainer = styled.div`
   height: auto;
 `;
 
-const VideoContainer = styled.div`
+const VideoContainer = styled.div<styleType>`
   width: 100%;
-  height: 80vh;
+  height: ${(props) => (props.$ismobile ? " 30vh" : "80vh")};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,24 +30,25 @@ const VideoContainer = styled.div`
   background-color: black;
 `;
 
-const Video = styled.iframe`
+const Video = styled.iframe<styleType>`
   width: 100%;
-  height: 100vh;
+  height: ${(props) => (props.$ismobile ? " 40vh" : "100vh")};
   object-fit: cover;
   border: none;
   outline: none;
   pointer-events: none;
 `;
 
-const ListContainer = styled.div`
+const ListContainer = styled.div<styleType>`
   display: flex;
   flex-direction: column;
   position: absolute;
   width: 100vw;
   height: auto;
-  top: 77vh;
+  top: ${(props) => (props.$ismobile ? "32vh" : " 77vh")};
+  padding-top: 15px;
   overflow-x: hidden;
-  background-color: black;
+  background-color: #141414;
   margin-top: 10px;
   backdrop-filter: blur(2px);
   padding-bottom: 50px;
@@ -60,38 +61,36 @@ const MovieContainer = styled.div`
   right: 0px;
 `;
 
-const MoviesSlider = styled.div`
+const MoviesSlider = styled.div<styleType>`
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  /* padding: 15px 0px; */
   padding-top: 15px;
   padding-bottom: 15px;
-  padding-left: 60px;
+  padding-left: ${(props) => (props.$ismobile ? "30px" : "60px")};
   overflow-y: hidden;
 `;
 
-const Movies = styled(motion.div)`
+const Movies = styled(motion.div)<styleType>`
   display: inline-block;
-  width: 250px;
-  height: 150px;
+  width: ${(props) => (props.$ismobile ? "180px" : "250px")};
+  height: ${(props) => (props.$ismobile ? "110px" : "150px")};
   margin-right: 8px;
   background-color: transparent;
   text-align: center;
   line-height: 120px;
   position: relative;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 12px;
 `;
 
-const SkeletonBox = styled(motion.div)`
+const SkeletonBox = styled(motion.div)<styleType>`
   display: inline-block;
-  width: 250px;
-  height: 150px;
+  width: ${(props) => (props.$ismobile ? "180px" : "250px")};
+  height: ${(props) => (props.$ismobile ? "110px" : "150px")};
   margin-right: 8px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: linear-gradient(90deg, #222222 25%, #444444 50%, #222222 75%);
-
   background-size: 200% 100%;
 `;
 const VideoSkeletonBox = styled(motion.div)`
@@ -105,44 +104,23 @@ const VideoSkeletonBox = styled(motion.div)`
   z-index: 2;
 `;
 
-const PreviousSlideBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 120px;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  border: none;
-  cursor: pointer;
-`;
-
-const NextSlideBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 120px;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  border: none;
-  cursor: pointer;
-`;
-
-const SliderTypeTxt = styled.span`
-  font-size: 18px;
+const SliderTypeTxt = styled.span<styleType>`
+  font-size: ${(props) => (props.$ismobile ? "16px;" : "18px")};
   font-weight: 400;
   margin-top: 30px;
-  padding-left: 60px;
+  padding-left: ${(props) => (props.$ismobile ? "30px" : "60px")};
   /* color: ${({ theme }) => theme.textColor}; */
   color: white;
 `;
 
-const VideoHiddenContainer = styled(motion.div)<{ $image: string }>`
+const VideoHiddenContainer = styled(motion.div)<{
+  $image: string;
+  $ismobile: boolean;
+}>`
   position: absolute;
   width: 100%;
   height: 100%;
-  margin-top: 130px;
+  margin-top: 100px;
   background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.9) 0%,
@@ -158,39 +136,40 @@ const VideoHiddenContainer = styled(motion.div)<{ $image: string }>`
   justify-content: center;
   z-index: 1;
   margin-bottom: 100px;
-  padding-left: 140px;
+  padding-left: ${(props) => (props.$ismobile ? "30px" : "140px")};
   font-size: 32;
   font-weight: bold;
   cursor: pointer;
 `;
 
 const Logo = styled.img<styleType>`
-  width: ${(props) => (props.$ismobile ? "80px" : "80px")};
-  margin-right: 30px;
+  width: ${(props) => (props.$ismobile ? "49px" : "80px")};
+  margin-left: ${(props) => (props.$ismobile ? "8px" : "0px")};
   cursor: pointer;
+  margin-top: ${(props) => (props.$ismobile ? "95px" : "100px")};
 `;
 
 const MoviePosterImg = styled.img`
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 10px;
+  border-radius: 12px;
 `;
-const TeaserTitleContainer = styled.div`
+const TeaserTitleContainer = styled.div<styleType>`
   display: flex;
   align-items: center;
   padding-left: 20px;
   height: auto;
-  font-size: 40px;
+  font-size: ${(props) => (props.$ismobile ? "20px" : "40px")};
   margin-top: 10px;
 `;
 
-const TeaserExplainContainer = styled.div`
+const TeaserExplainContainer = styled.div<styleType>`
   display: flex;
   align-items: center;
   padding-left: 20px;
-  font-size: 20px;
-  margin-top: 20px;
+  font-size: ${(props) => (props.$ismobile ? "11px" : "20px")};
+  margin-top: ${(props) => (props.$ismobile ? "5px" : "20px")};
 `;
 
 const ModalContainer = styled.div`
@@ -451,14 +430,13 @@ const Main = () => {
       />
       <MainContainer>
         <VideoContainer
-          // onMouseEnter={() => setShowIframe(true)}
-          // onMouseLeave={() => setShowIframe(false)}
           onMouseEnter={() => {
             if (teaser.stillCutUrl !== "") setShowIframe(true);
           }}
           onMouseLeave={() => {
             if (teaser.stillCutUrl !== "") setShowIframe(false);
           }}
+          $ismobile={isMobile}
         >
           {showIframe && (
             <Video
@@ -468,6 +446,7 @@ const Main = () => {
               title="Teaser"
               allow="accelerometer; autoplay; encrypted-media"
               allowFullScreen
+              $ismobile={isMobile}
             />
           )}
           <AnimatePresence>
@@ -481,10 +460,15 @@ const Main = () => {
                   exit={{ opacity: 0, transition: { duration: 0.3 } }}
                   transition={{ duration: 0.3 }}
                   $image={teaser.stillCutUrl}
+                  $ismobile={isMobile}
                 >
                   <Logo $ismobile={isMobile} src={logo} />
-                  <TeaserTitleContainer>{teaser.title}</TeaserTitleContainer>
-                  <TeaserExplainContainer>{teaser.plot}</TeaserExplainContainer>
+                  <TeaserTitleContainer $ismobile={isMobile}>
+                    {teaser.title}
+                  </TeaserTitleContainer>
+                  <TeaserExplainContainer $ismobile={isMobile}>
+                    {teaser.plot}
+                  </TeaserExplainContainer>
                 </VideoHiddenContainer>
               ) : (
                 <VideoSkeletonBox
@@ -503,14 +487,15 @@ const Main = () => {
         </VideoContainer>
         {keyword !== "" ? (
           searchedMovieList.length > 0 ? (
-            <ListContainer>
+            <ListContainer $ismobile={isMobile}>
               <MovieContainer>
-                <SliderTypeTxt>
+                <SliderTypeTxt $ismobile={isMobile}>
                   <span>검색 결과</span>
                 </SliderTypeTxt>
-                <MoviesSlider>
+                <MoviesSlider $ismobile={isMobile}>
                   {searchedMovieList.map((movie, i) => (
                     <Movies
+                      $ismobile={isMobile}
                       key={movie.movie_id ?? i}
                       whileHover={{
                         scale: 1.1,
@@ -537,25 +522,26 @@ const Main = () => {
               </MovieContainer>
             </ListContainer>
           ) : (
-            <ListContainer>
+            <ListContainer $ismobile={isMobile}>
               <MovieContainer>
-                <SliderTypeTxt>
+                <SliderTypeTxt $ismobile={isMobile}>
                   <span>검색 결과가 없습니다.</span>
                 </SliderTypeTxt>
               </MovieContainer>
             </ListContainer>
           )
         ) : (
-          <ListContainer>
+          <ListContainer $ismobile={isMobile}>
             {reviewData.map(({ prefix, highlight }, idx) => (
               <MovieContainer key={idx}>
-                <SliderTypeTxt>
+                <SliderTypeTxt $ismobile={isMobile}>
                   {prefix} <strong>{highlight}</strong>
                 </SliderTypeTxt>
-                <MoviesSlider>
+                <MoviesSlider $ismobile={isMobile}>
                   {isReviewLoading ? (
                     Array.from({ length: 10 }).map((_, i) => (
                       <SkeletonBox
+                        $ismobile={isMobile}
                         key={i}
                         animate={{
                           backgroundPosition: ["200% 0", "-200% 0"],
@@ -570,6 +556,7 @@ const Main = () => {
                   ) : reviewLists[idx] && reviewLists[idx].length > 0 ? (
                     reviewLists[idx].map((review, i) => (
                       <Movies
+                        $ismobile={isMobile}
                         key={review.reviewId ?? i}
                         style={{ backgroundColor: "gray" }}
                         whileHover={{
@@ -593,13 +580,14 @@ const Main = () => {
             ))}
             {movieData.map(({ prefix, highlight }, idx) => (
               <MovieContainer key={idx}>
-                <SliderTypeTxt>
+                <SliderTypeTxt $ismobile={isMobile}>
                   {prefix} <strong>{highlight}</strong>
                 </SliderTypeTxt>
-                <MoviesSlider>
+                <MoviesSlider $ismobile={isMobile}>
                   {isMovieLoading ? (
                     Array.from({ length: 10 }).map((_, i) => (
                       <SkeletonBox
+                        $ismobile={isMobile}
                         key={i}
                         animate={{
                           backgroundPosition: ["200% 0", "-200% 0"],
@@ -614,6 +602,7 @@ const Main = () => {
                   ) : movieLists[idx] && movieLists[idx].length > 0 ? (
                     movieLists[idx].map((movie) => (
                       <Movies
+                        $ismobile={isMobile}
                         key={movie.movie_id}
                         whileHover={{
                           scale: 1.1,

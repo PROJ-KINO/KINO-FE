@@ -1,8 +1,12 @@
+import profileIconWhite from "../assets/img/profileIconWhite.png";
+import profileIcon from "../assets/img/profileIcon.png";
+
 export interface Theme {
   backgroundColor: string;
   textColor: string;
   modalTextColor: string;
   hoverColor: string;
+  profileImg: string;
 }
 
 export const lightTheme = {
@@ -10,6 +14,7 @@ export const lightTheme = {
   textColor: "#000000",
   modalTextColor: "#555",
   hoverColor: "#d9d9d9",
+  profileImg: profileIcon,
 };
 
 export const darkTheme = {
@@ -18,4 +23,5 @@ export const darkTheme = {
   textColor: "#ffffff",
   modalTextColor: "#d9d9d9",
   hoverColor: "#212529",
+  profileImg: profileIconWhite,
 };
