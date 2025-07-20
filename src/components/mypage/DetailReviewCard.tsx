@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -8,6 +9,7 @@ import parse from "html-react-parser";
 interface DetailReview {
   reviewId: string;
   image: string;
+  userId: number;
   userProfile: string;
   userNickname: string;
   title: string;
@@ -71,6 +73,7 @@ const ReviewText = styled.div<styleType>`
     border-radius: 8px;
     height: auto;
     display: block;
+    margin: 5px 0;
   }
 `;
 
@@ -256,6 +259,7 @@ const DetailReviewCard: React.FC<DetailReviewCardProps> = ({
   onClick,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
   const handleMenuClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setMenuOpen((prev) => !prev);
@@ -283,7 +287,10 @@ const DetailReviewCard: React.FC<DetailReviewCardProps> = ({
         /> */}
         <ContentWrapper $ismobile={isMobile}>
           {showProfile && (
-            <UserProfile $ismobile={isMobile}>
+            <UserProfile
+              $ismobile={isMobile}
+              // onClick={() => navigate(`/user/${review.userId}`)}
+            >
               <UserImage
                 $ismobile={isMobile}
                 src={review.userProfile}
