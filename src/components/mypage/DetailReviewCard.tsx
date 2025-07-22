@@ -409,7 +409,6 @@ const DetailReviewCard: React.FC<DetailReviewCardProps> = ({
 };
 
 export default DetailReviewCard;
-=======
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
